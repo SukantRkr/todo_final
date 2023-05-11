@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Todo Application</string>
+    <string name="categoryName">Category Name</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save">Save</string>
+    <string name="category_name">Category Name</string>
+    <string name="todo_title">Title</string>
+    <string name="todo_description">Description</string>
+    <string name="todo_date">Date</string>
+    <string name="todo_is_completed">Is Completed</string>
+    <string name="todo_completed">Completed</string>
+    <string name="todo_priority">Priority</string>
+    <string name="todo_high">High</string>
+    <string name="todo_medium">Medium</string>
+    <string name="todo_low">Low</string>
+    <string name="todo_category">Category</string>
+    <string name="save_todo">Save</string>
+    <string name="log_in">Log In</string>
+    <string name="register">Register</string>
+    <string name="user_name">User Name</string>
+    <string name="tagline">An app to help you keep track of your work</string>
+    <string name="by_sukant_rajkarnikar">By: Sukant Rajkarnikar</string>
+</resources>
