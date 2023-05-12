@@ -1,5 +1,6 @@
 package com.example.todo_final;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -55,6 +56,7 @@ public class CategoryListFragment extends Fragment implements CategoryAdapter.On
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getActivity(), "Item Clicked on position " + position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), TodoListActivity.class);
+        startActivity(intent);
     }
 }

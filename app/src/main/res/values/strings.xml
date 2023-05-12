@@ -25,5 +25,9 @@
     <string name="by_sukant_rajkarnikar">By: Sukant Rajkarnikar</string>
     <string name="category_saved">Category Saved</string>
     <string name="categories">Categories</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm New Password</string>
+    <string name="new_password">New Password</string>
 
 </resources>

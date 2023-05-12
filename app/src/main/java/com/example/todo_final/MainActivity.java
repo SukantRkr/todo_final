@@ -36,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
                 .setReorderingAllowed(true)
                 .commit();
     }
+    public void replaceFragmentTodo(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView4, ToDoFragment.class, null)
+                .addToBackStack("Todo")
+                .setReorderingAllowed(true)
+                .commit();
+    }
 
     @Override
     public boolean onCreatePanelMenu(int featureId, @NonNull Menu menu) {
@@ -53,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.main_menu_clear_category:
                 return true;
             case R.id.main_menu_logout:
-                SharedPreferences sharedPreferences =  getSharedPreferences("login", MODE_PRIVATE);
+                SharedPreferences sharedPreferences =  getSharedPreferences("Login", MODE_PRIVATE);
                 sharedPreferences.edit().clear().commit();
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);

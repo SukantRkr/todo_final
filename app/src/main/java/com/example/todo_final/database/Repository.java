@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.todo_final.model.Category;
 import com.example.todo_final.model.Todo;
+import com.example.todo_final.model.User;
 
 import java.util.List;
 
@@ -11,9 +12,12 @@ public class Repository {
     private CategoryDao categoryDao;
     private TodoDao todoDao;
 
+    private UserDao userDao;
+
     public Repository(AppDatabase appDatabase) {
         this.categoryDao = appDatabase.categoryDao();
         this.todoDao = appDatabase.todoDao();
+        this.userDao = appDatabase.userDao();
     }
 
     public void insertCategory(Category category) {
@@ -44,5 +48,13 @@ public class Repository {
 
     public LiveData<List<Todo>> loadAllTodo(int categoryId) {
         return todoDao.loadTodoByCategoryId(categoryId);
+    }
+
+    public LiveData<User> loadUserByUserName(String userName){
+        return userDao.loadUserByUserName(userName);
+    }
+
+    public void insertUser(User user) {
+        AppDatabase.databaseWriteExecutor.execute(() -> userDao.insert(user));
     }
 }
