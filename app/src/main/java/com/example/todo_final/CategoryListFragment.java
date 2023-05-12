@@ -3,9 +3,11 @@ package com.example.todo_final;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,16 +23,19 @@ import com.example.todo_final.viewModel.CategoryViewModel;
 
 import java.util.List;
 
-public class CategoryListFragment extends Fragment implements CategoryAdapter.OnTaskClickListener{
+public class CategoryListFragment extends Fragment implements CategoryAdapter.OnTaskClickListener {
 
     CategoryViewModel categoryViewModel;
     RecyclerView categoryRecyclerView;
+
+    Category category;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_category_list, container, false);
+        category = new Category();
 
         categoryViewModel = new ViewModelProvider(getActivity()).get(CategoryViewModel.class);
         CategoryAdapter categoryAdapter = new CategoryAdapter(this::onItemClick);
@@ -45,11 +50,40 @@ public class CategoryListFragment extends Fragment implements CategoryAdapter.On
             @Override
             public void run() {
                 categoryRecyclerView = view.findViewById(R.id.category_recycler_view);
-                categoryRecyclerView.setLayoutManager( new LinearLayoutManager(getActivity()));
+                categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 categoryRecyclerView.setAdapter(categoryAdapter);
 
+                new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        if (direction == ItemTouchHelper.LEFT) {
+                            categoryViewModel.deleteCategory(categoryAdapter.getCategoryInPosition(viewHolder.getAdapterPosition()));
+                            categoryRecyclerView.getRecycledViewPool().clear();
+                            categoryAdapter.notifyDataSetChanged();
+
+                            Toast.makeText(getActivity().getApplicationContext(), "Category Removed", Toast.LENGTH_SHORT).show();
+                        } else if (direction == ItemTouchHelper.RIGHT) {
+                            int position = viewHolder.getAdapterPosition();
+                            UpdateCategoryFragment updateCategoryFragment = new UpdateCategoryFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("id", categoryAdapter.getCategoryInPosition(position).getCategoryId());
+                            bundle.putString("name", categoryAdapter.getCategoryInPosition(position).getCategory());
+                            updateCategoryFragment.setArguments(bundle);
+                            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerView4, updateCategoryFragment).addToBackStack(null).commit();
+                        }
+
+                    }
+                }).attachToRecyclerView(categoryRecyclerView);
+
+
             }
-        },1000);
+        }, 1000);
 
         return view;
     }

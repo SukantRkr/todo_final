@@ -28,4 +28,7 @@ public interface CategoryDao {
 
     @Query("select * from category where categoryId =:categoryId")
     LiveData<List<Category>> loadCategoryById(int categoryId);
+
+    @Query("update category set category=:category where categoryId =:categoryId")
+    void updateAllCategory(int categoryId, String category);
 }

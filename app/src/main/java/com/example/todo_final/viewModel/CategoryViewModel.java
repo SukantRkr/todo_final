@@ -28,5 +28,13 @@ public void saveCategory(Category category){
         repository.insertCategory(category);
 }
 
+public void updateCategory(int categoryId, String title){
+        repository.updateAllCategory(categoryId,title);
+}
+
 public LiveData<List<Category>>getCategoryList(){ return categoryList;}
+
+    public void  deleteCategory(Category category){
+        repository.deleteCategory(category);
+    }
 }

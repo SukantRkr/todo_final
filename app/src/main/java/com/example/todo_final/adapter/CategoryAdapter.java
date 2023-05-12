@@ -65,4 +65,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public interface  OnTaskClickListener{
         void onItemClick(int position);
     }
+
+    public Category getCategoryInPosition(int position){
+        return categoryList.get(position);
+    }
 }

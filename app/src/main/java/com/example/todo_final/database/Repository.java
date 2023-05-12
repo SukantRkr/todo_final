@@ -57,4 +57,10 @@ public class Repository {
     public void insertUser(User user) {
         AppDatabase.databaseWriteExecutor.execute(() -> userDao.insert(user));
     }
+
+    public void updateAllCategory(int categoryId, String title){
+        AppDatabase.databaseWriteExecutor.execute(()->{
+            categoryDao.updateAllCategory(categoryId,title);
+        });
+    }
 }

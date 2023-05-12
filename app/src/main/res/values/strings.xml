@@ -29,5 +29,6 @@
     <string name="username">Username</string>
     <string name="confirm_password">Confirm New Password</string>
     <string name="new_password">New Password</string>
+    <string name="update">Update</string>
 
 </resources>
