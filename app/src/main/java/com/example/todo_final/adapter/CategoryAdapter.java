@@ -69,4 +69,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public Category getCategoryInPosition(int position){
         return categoryList.get(position);
     }
+
+    public List<Category> getCategoryList(){
+        return categoryList;
+    }
 }

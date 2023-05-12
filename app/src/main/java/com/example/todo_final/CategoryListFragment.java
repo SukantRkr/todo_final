@@ -63,9 +63,10 @@ public class CategoryListFragment extends Fragment implements CategoryAdapter.On
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                         if (direction == ItemTouchHelper.LEFT) {
-                            categoryViewModel.deleteCategory(categoryAdapter.getCategoryInPosition(viewHolder.getAdapterPosition()));
-                            categoryRecyclerView.getRecycledViewPool().clear();
-                            categoryAdapter.notifyDataSetChanged();
+                            int position = viewHolder.getAdapterPosition();
+                            categoryViewModel.deleteCategory(categoryAdapter.getCategoryInPosition(position));
+                            categoryAdapter.getCategoryList().remove(categoryAdapter.getCategoryInPosition(position));
+                            categoryAdapter.notifyItemRemoved(position);
 
                             Toast.makeText(getActivity().getApplicationContext(), "Category Removed", Toast.LENGTH_SHORT).show();
                         } else if (direction == ItemTouchHelper.RIGHT) {
