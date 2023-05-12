@@ -14,7 +14,8 @@
         android:layout_weight="1"
         android:ems="10"
         android:hint="@string/categoryName"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:padding="16dp" />
 
     <Button
         android:id="@+id/fragmentCategoryBtnSave"
@@ -22,5 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
+        android:backgroundTint="@color/primary_color"
+        android:padding="16dp"
         android:text="@string/save" />
 </LinearLayout>
