@@ -58,11 +58,11 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoView> {
 
         public TodoView(@NonNull View itemView) {
             super(itemView);
-            tvTitle =(TextView) itemView.findViewById(R.id.);
-            tvDescription =(TextView) itemView.findViewById(R.id.);
-            tvComplete =(TextView) itemView.findViewById(R.id.);
-            tvDate =(TextView) itemView.findViewById(R.id.);
-            tvPriority =(TextView) itemView.findViewById(R.id.);
+            tvTitle =(TextView) itemView.findViewById(R.id.todo_item_tv_title);
+            tvDescription =(TextView) itemView.findViewById(R.id.todo_item_tv_description);
+            tvComplete =(TextView) itemView.findViewById(R.id.todo_item_tv_complete);
+            tvDate =(TextView) itemView.findViewById(R.id.todo_item_tv_date);
+            tvPriority =(TextView) itemView.findViewById(R.id.todo_item_tv_prority);
         }
     }
 

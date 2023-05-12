@@ -1,6 +1,7 @@
 package com.example.todo_final;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,10 +17,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.todo_final.model.Category;
 import com.example.todo_final.model.Todo;
 import com.example.todo_final.viewModel.CategoryViewModel;
+import com.example.todo_final.viewModel.TodoViewModel;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,6 +34,7 @@ import java.util.List;
 public class ToDoFragment extends Fragment {
 
     CategoryViewModel categoryViewModel;
+    TodoViewModel todoViewModel;
     Spinner categoryDropdownList;
     EditText todoDate, todoTitle, todoDescription;
 
@@ -53,6 +57,13 @@ public class ToDoFragment extends Fragment {
             }
         });
 
+        todoSaveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveData();
+            }
+        });
+
         return view;
     }
 
@@ -64,10 +75,9 @@ public class ToDoFragment extends Fragment {
         todoDescription = view.findViewById(R.id.fragment_todo_txtDescription);
         todoPriority = view.findViewById(R.id.fragment_todo_rg_priority);
         todoIsComplete = view.findViewById(R.id.checkBox);
+        todoSaveBtn = view.findViewById(R.id.fragmentCategoryBtnSave);
 
-        categoryViewModel.getCategoryList().observe(getViewLifecycleOwner(), categories -> {
-            setCategorySpinner(categories);
-        });
+        categoryViewModel.getCategoryList().observe(getViewLifecycleOwner(), this::setCategorySpinner);
     }
 
     private void showDateDialog() {
@@ -116,5 +126,12 @@ public class ToDoFragment extends Fragment {
         Date createdOn = new Date();
         boolean isComplete = todoIsComplete.isChecked();
         Todo todo = new Todo(title, desc, todoDateOn, isComplete, prority, category.getCategoryId(), createdOn);
+
+        todoViewModel.saveTodo(todo);
+        Toast.makeText(getActivity(), "Todo Saved", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getActivity(), TodoListActivity.class);
+        intent.putExtra("categoryId", category.getCategoryId());
+        startActivity(intent);
     }
 }

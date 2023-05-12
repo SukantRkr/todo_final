@@ -6,6 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
 import com.example.todo_final.model.Category;
 import com.example.todo_final.model.Todo;
@@ -13,8 +14,8 @@ import com.example.todo_final.model.Todo;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(exportSchema = false, version = 1, entities = {Category.class, Todo.class})
-
+@Database(exportSchema = false, version = 2, entities = {Category.class, Todo.class})
+@TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public static final String dbName = "ToDoApp";
 

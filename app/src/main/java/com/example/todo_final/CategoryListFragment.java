@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,9 +40,15 @@ public class CategoryListFragment extends Fragment implements CategoryAdapter.On
             }
         });
 
-        categoryRecyclerView =view.findViewById(R.id.category_recycler_view);
-        categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        categoryRecyclerView.setAdapter(categoryAdapter);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                categoryRecyclerView = view.findViewById(R.id.category_recycler_view);
+                categoryRecyclerView.setLayoutManager( new LinearLayoutManager(getActivity()));
+                categoryRecyclerView.setAdapter(categoryAdapter);
+
+            }
+        },1000);
 
         return view;
     }

@@ -11,10 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="148dp"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/log_in"
+        android:textColor="@color/primary_color"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
@@ -34,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/user_name"
-            />
+            android:textColor="@color/primary_color" />
         <EditText
             android:id="@+id/login_activity_username"
             android:layout_width="match_parent"
@@ -49,7 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Password" />
+            android:text="Password"
+            android:textColor="@color/primary_color" />
 
         <EditText
             android:id="@+id/login_activity_password"
@@ -70,18 +73,19 @@
                 android:id="@+id/login_activity_btn_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_margin="10dp"
-                android:text="@string/log_in"
-                />
+                android:layout_weight="1"
+                android:backgroundTint="@color/primary_color"
+                android:text="@string/log_in" />
+
             <Button
                 android:id="@+id/login_activity_btn_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:text="@string/register"
-                />
+                android:backgroundTint="@color/primary_color"
+                android:text="@string/register" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

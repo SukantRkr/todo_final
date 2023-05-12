@@ -7,10 +7,9 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "category")
 public class Category {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "CategoryId")
     private int categoryId;
 
-    @ColumnInfo(name = "Category")
+    @ColumnInfo(name = "category")
     private String category;
 
     public int getCategoryId() {

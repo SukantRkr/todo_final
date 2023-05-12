@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.todo_final.model.Category;
 import com.example.todo_final.viewModel.CategoryViewModel;
@@ -35,6 +36,7 @@ public class CategoryFragment extends Fragment {
                 Category category = new Category();
                 category.setCategory(categoryTxt.getText().toString());
                 viewModel.saveCategory(category);
+                Toast.makeText(getActivity(), "Category Created", Toast.LENGTH_SHORT).show();
                 ((MainActivity) getActivity()).replaceFragmentCategoryList();
             }
         });

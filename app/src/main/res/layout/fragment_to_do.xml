@@ -134,6 +134,7 @@
                 android:id="@+id/fragment_todo_btn_Save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary_color"
                 android:text="@string/save_todo" />
         </LinearLayout>
     </ScrollView>

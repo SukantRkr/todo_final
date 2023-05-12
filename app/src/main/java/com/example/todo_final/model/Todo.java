@@ -7,7 +7,9 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(foreignKeys = @ForeignKey(entity = Category.class, parentColumns = "CategoryId", childColumns = "categoryId"))
+@Entity(foreignKeys = @ForeignKey(entity = Category.class,
+        parentColumns = "categoryId",
+        childColumns = "categoryId"))
 public class Todo {
     @PrimaryKey(autoGenerate = true)
     private int todoId;

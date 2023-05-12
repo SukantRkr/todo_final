@@ -32,7 +32,7 @@ public class Repository {
         return categoryDao.loadAllCategory();
     }
 
-    public LiveData<List<Category>> loadCategoryById(int categoryId){
+    public LiveData<List<Category>> loadCategoryById(int categoryId) {
         return categoryDao.loadCategoryById(categoryId);
     }
 
@@ -42,7 +42,7 @@ public class Repository {
         });
     }
 
-    public LiveData<List<Todo>>loadAllTodo(int categoryId){
+    public LiveData<List<Todo>> loadAllTodo(int categoryId) {
         return todoDao.loadTodoByCategoryId(categoryId);
     }
 }
