@@ -92,6 +92,8 @@ public class CategoryListFragment extends Fragment implements CategoryAdapter.On
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(getActivity(), TodoListActivity.class);
+//        int categoryId = categoryViewModel.getCategoryList().getValue().get(position).getCategoryId();
+//        intent.putExtra("categoryId", categoryId);
         startActivity(intent);
     }
 }

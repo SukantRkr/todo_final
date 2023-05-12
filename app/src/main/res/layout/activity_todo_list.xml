@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".TodoListActivity">
+    android:id="@+id/fragmentContainer"
+    tools:context=".TodoListActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="6dp">
 
     <TextView
         android:id="@+id/activity_todo_list_category"
@@ -13,12 +16,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="11dp"
+        android:text="TextView"
+
         android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/activity_todo_list_rv_todo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_todo_list_rv_todo"
@@ -28,18 +33,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_todo_list_category"
-        tools:listitem="@layout/to_do_item_layout" />
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_todo_floating_btn"
+        android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-70dp"
+        android:layout_marginEnd="-360dp"
+        android:backgroundTint="@color/primary_color"
         android:clickable="true"
-        app:backgroundTint="@color/primary_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        android:focusable="true"
+        app:layout_constraintEnd_toStartOf="@+id/activity_todo_list_rv_todo"
+        app:layout_constraintTop_toBottomOf="@+id/activity_todo_list_rv_todo"
+        app:srcCompat="@drawable/baseline_add_24"
+        app:tint="@color/white"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,7 +23,9 @@ public class CategoryViewModel extends AndroidViewModel {
         repository = new Repository(appDatabase);
         categoryList = repository.loadAllCategory();
     }
-
+public LiveData<Category> getCategoryByCategoryId(int categoryId){
+        return repository.loadCategoryById(categoryId);
+}
 public void saveCategory(Category category){
         repository.insertCategory(category);
 }

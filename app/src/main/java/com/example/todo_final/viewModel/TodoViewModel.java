@@ -10,6 +10,7 @@ import com.example.todo_final.database.AppDatabase;
 import com.example.todo_final.database.Repository;
 import com.example.todo_final.model.Todo;
 
+import java.util.Date;
 import java.util.List;
 
 public class TodoViewModel extends AndroidViewModel {
@@ -29,5 +30,25 @@ public class TodoViewModel extends AndroidViewModel {
     public LiveData<List<Todo>> getTodoList(int categoryId){
         todoList = repository.loadAllTodo(categoryId);
         return todoList;
+    }
+
+    public void  removeAllTodo(){
+        repository.deleteAllTodo();
+    }
+
+    public void  removeCompletedTodo(){
+        repository.deleteCompletedTodo();
+    }
+
+    public void updateOnCompleteTodo(int todo) {
+        repository.updateIsCompleteTodo(todo);
+    }
+
+    public void  removeTodo(Todo todo){
+        repository.deleteTodo(todo);
+    }
+
+    public void ChangeTodo(int todoId, String title, String description, Date date, boolean completed, Date createdOn) {
+        repository.updateAllTodo(todoId,title,description,date,completed,createdOn);
     }
 }

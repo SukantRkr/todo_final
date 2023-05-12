@@ -6,6 +6,7 @@ import com.example.todo_final.model.Category;
 import com.example.todo_final.model.Todo;
 import com.example.todo_final.model.User;
 
+import java.util.Date;
 import java.util.List;
 
 public class Repository {
@@ -36,13 +37,19 @@ public class Repository {
         return categoryDao.loadAllCategory();
     }
 
-    public LiveData<List<Category>> loadCategoryById(int categoryId) {
+    public LiveData<Category> loadCategoryById(int categoryId) {
         return categoryDao.loadCategoryById(categoryId);
     }
 
     public void insertTodo(Todo todo) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             todoDao.insert(todo);
+        });
+    }
+
+    public void deleteAllTodo() {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            todoDao.deleteAll();
         });
     }
 
@@ -61,6 +68,30 @@ public class Repository {
     public void updateAllCategory(int categoryId, String title){
         AppDatabase.databaseWriteExecutor.execute(()->{
             categoryDao.updateAllCategory(categoryId,title);
+        });
+    }
+
+    public void deleteCompletedTodo() {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            todoDao.deleteAllCompleted();
+        });
+    }
+
+    public void updateIsCompleteTodo(int todo) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            todoDao.completeTask(todo);
+        });
+    }
+
+    public void deleteTodo(Todo todo) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            todoDao.delete(todo);
+        });
+    }
+
+    public void updateAllTodo(int todoId, String title, String description, Date date, boolean completed, Date createdOn) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            todoDao.updateTodo(todoId,title,description,date,completed,createdOn);
         });
     }
 }

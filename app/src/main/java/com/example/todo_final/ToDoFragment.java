@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -75,7 +76,8 @@ public class ToDoFragment extends Fragment {
         todoDescription = view.findViewById(R.id.fragment_todo_txtDescription);
         todoPriority = view.findViewById(R.id.fragment_todo_rg_priority);
         todoIsComplete = view.findViewById(R.id.checkBox);
-        todoSaveBtn = view.findViewById(R.id.fragmentCategoryBtnSave);
+        todoSaveBtn = view.findViewById(R.id.fragment_todo_btn_Save);
+        todoViewModel =  new ViewModelProvider(getActivity()).get(TodoViewModel.class);
 
         categoryViewModel.getCategoryList().observe(getViewLifecycleOwner(), this::setCategorySpinner);
     }
@@ -90,7 +92,7 @@ public class ToDoFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                todoDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year + "/");
+                todoDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
             }
         }, year, month, day);
         datePickerDialog.show();
@@ -107,14 +109,14 @@ public class ToDoFragment extends Fragment {
         String date = todoDate.getText().toString();
         Category category = (Category) categoryDropdownList.getSelectedItem();
         int checkedRadio = todoPriority.getCheckedRadioButtonId();
-        int prority = 0;
+        int priority = 0;
         switch (checkedRadio) {
             case R.id.fragment_todo_rb_low:
-                prority = 2;
+                priority = 2;
             case R.id.fragment_todo_rb_mid:
-                prority = 1;
+                priority = 1;
             case R.id.fragment_todo_rb_high:
-                prority = 0;
+                priority = 0;
         }
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyy");
         Date todoDateOn = null;
@@ -125,13 +127,28 @@ public class ToDoFragment extends Fragment {
         }
         Date createdOn = new Date();
         boolean isComplete = todoIsComplete.isChecked();
-        Todo todo = new Todo(title, desc, todoDateOn, isComplete, prority, category.getCategoryId(), createdOn);
+
+        if (title.isEmpty()) {
+            Toast.makeText(getActivity(), "Todo Title cannot be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (desc.isEmpty()) {
+            Toast.makeText(getActivity(), "Todo Descirption cannot be empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(todoDateOn==null){
+            Toast.makeText(getActivity(), "Select Date", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Todo todo = new Todo(title, desc, todoDateOn, isComplete, priority, category.getCategoryId(), createdOn);
 
         todoViewModel.saveTodo(todo);
         Toast.makeText(getActivity(), "Todo Saved", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(getActivity(), TodoListActivity.class);
-        intent.putExtra("categoryId", category.getCategoryId());
-        startActivity(intent);
+        Fragment frag = new CategoryListFragment();
+        FragmentTransaction transition = getActivity().getSupportFragmentManager().beginTransaction();
+        transition.replace(R.id.fragmentContainer, frag).commit();
     }
 }

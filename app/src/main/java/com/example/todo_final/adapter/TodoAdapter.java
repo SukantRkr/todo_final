@@ -1,5 +1,7 @@
 package com.example.todo_final.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todo_final.R;
+import com.example.todo_final.UpdateTodo;
 import com.example.todo_final.model.Todo;
 import com.example.todo_final.viewModel.TodoViewModel;
 
@@ -18,8 +21,11 @@ import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoView> {
     private List<Todo> todoList;
+    Context context;
 
-    public void setTodoList(List<Todo> todoList) {
+
+    public void setTodoList(List<Todo> todoList, Context context) {
+        this.context = context;
         this.todoList = todoList;
     }
 
@@ -46,6 +52,23 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoView> {
 
         DateFormat dateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
         holder.tvDate.setText(dateFormat.format(todoList.get(position).getTodoDate()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, UpdateTodo.class);
+                intent.putExtra("id",todoList.get(position).getTodoId());
+                intent.putExtra("todotitle",todoList.get(position).getTitle());
+                intent.putExtra("tvComplete",todoList.get(position).isComplete());
+                intent.putExtra("priority",todoList.get(position).getPriority());
+                intent.putExtra("dateTime",todoList.get(position).getTodoDate());
+                intent.putExtra("description",todoList.get(position).getDescription());
+                intent.putExtra("createdOn",todoList.get(position).getCreatedOn());
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -66,4 +89,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoView> {
         }
     }
 
+    public Todo getNote(int position){
+        return todoList.get(position);
+    }
+
+    public int getUpdateNote(int position){
+
+        return todoList.get(position).getTodoId();
+    }
 }
