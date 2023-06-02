@@ -59,8 +59,6 @@ public class TodoListActivity extends AppCompatActivity {
 
         newTodoBtn = findViewById(R.id.floatingActionButton);
         int categoryId = getIntent().getIntExtra("categoryId", 1);
-        Toast.makeText(this, "cATEGORY ID IS NOT NULL " + categoryId, Toast.LENGTH_SHORT).show();
-
 
         todoViewModel.getTodoList(categoryId).observe(this, new Observer<List<Todo>>() {
             @Override

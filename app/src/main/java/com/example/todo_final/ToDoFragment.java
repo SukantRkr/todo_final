@@ -133,7 +133,7 @@ public class ToDoFragment extends Fragment {
             return;
         }
         if (desc.isEmpty()) {
-            Toast.makeText(getActivity(), "Todo Descirption cannot be empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Todo Description cannot be empty", Toast.LENGTH_SHORT).show();
             return;
         }
 

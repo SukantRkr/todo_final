@@ -32,13 +32,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoView> {
     @NonNull
     @Override
     public TodoView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_todo_list, parent, false);
-        TodoView todoView = new TodoView(view);
-        return todoView;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.to_do_item_layout, parent, false);
+        return new TodoView(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TodoAdapter.TodoView holder, int position) {
+    public void onBindViewHolder(@NonNull TodoView holder, int position) {
         holder.tvTitle.setText(todoList.get(position).getTitle());
         holder.tvDescription.setText(todoList.get(position).getDescription());
         holder.tvComplete.setText(todoList.get(position).isComplete() == true ? "Completed" : "Incomplete");
@@ -76,6 +75,15 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoView> {
         return (todoList == null ? 0 : todoList.size());
     }
 
+    public Todo getNote(int position){
+        return todoList.get(position);
+    }
+
+    public int getUpdateNote(int position){
+
+        return todoList.get(position).getTodoId();
+    }
+
     public class TodoView extends RecyclerView.ViewHolder {
         TextView tvTitle, tvDescription, tvComplete, tvDate, tvPriority;
 
@@ -87,14 +95,5 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoView> {
             tvDate =(TextView) itemView.findViewById(R.id.todo_item_tv_date);
             tvPriority =(TextView) itemView.findViewById(R.id.todo_item_tv_prority);
         }
-    }
-
-    public Todo getNote(int position){
-        return todoList.get(position);
-    }
-
-    public int getUpdateNote(int position){
-
-        return todoList.get(position).getTodoId();
     }
 }
